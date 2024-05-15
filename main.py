@@ -24,9 +24,7 @@ class RockPaperScissor:
         new_size = (450, 200)
         rock_image_pill = Image.open('images/rock.png').resize(new_size)
         paper_image_pill = Image.open('images/paper.png').resize(new_size)
-        scissors_image_pill = Image.open('images/scissors.png').resize(
-            new_size
-        )
+        scissors_image_pill = Image.open('images/scissors.png').resize(new_size)
 
         self.rock_new_image = ImageTk.PhotoImage(rock_image_pill)
         self.paper_new_image = ImageTk.PhotoImage(paper_image_pill)
@@ -44,13 +42,8 @@ class RockPaperScissor:
             background='#A0DEFF',
             font=self.font_text_label,
         )
-        self.label_image_computer = tkinter.Label(
-            background='white',
-        )
-
-        self.label_text_result = tkinter.Label(
-            font=self.font_text_label,
-        )
+        self.label_image_computer = tkinter.Label(background='white')
+        self.label_text_result = tkinter.Label(font=self.font_text_label)
 
         self.button_widget()
         self.show_widget()
@@ -58,28 +51,26 @@ class RockPaperScissor:
         self.root.mainloop()
 
     def frame_widget(self):
-        self.frame_buttons = tkinter.Frame(
-            bg='cyan',
-        )
+        self.frame_buttons = tkinter.Frame(bg='cyan')
 
     def button_widget(self):
         self.rock_button = tkinter.Button(
             master=self.frame_buttons,
             image=self.rock_image,
             height=220,
-            command=lambda: (self.check_result('rock'),),
+            command=lambda: self.check_result('rock'),
         )
         self.paper_button = tkinter.Button(
             master=self.frame_buttons,
             image=self.paper_image,
             height=220,
-            command=lambda: (self.check_result('paper'),),
+            command=lambda: self.check_result('paper'),
         )
         self.scissors_button = tkinter.Button(
             master=self.frame_buttons,
             image=self.scissors_image,
             height=220,
-            command=lambda: (self.check_result('scissors'),),
+            command=lambda: self.check_result('scissors'),
         )
         self.restart_button = tkinter.Button(
             text='Restart Game',
@@ -97,38 +88,36 @@ class RockPaperScissor:
         """
 
         self.human_choice_index = self.all_choices.index(human_choice)
-        self.computer_choice = self.all_choices[
-            random.randint(0, len(self.all_choices) - 1)
-        ]
-        self.computer_choice_index = self.all_choices.index(
-            self.computer_choice
-        )
+        self.computer_choice = self.all_choices[random.randint(0, len(self.all_choices) - 1)]
+        self.computer_choice_index = self.all_choices.index(self.computer_choice)
 
-        if self.human_choice_index == 0 and self.computer_choice_index == 2:
-            (
-                self.label_text_result['text'],
-                self.label_text_result['background'],
-            ) = ('👾🥳 You win 🥳👾', 'green')
+        if self.human_choice_index == 2 and self.computer_choice_index == 0:
+            self.label_text_result['text'], self.label_text_result['background'], = (
+                '💔 You lose 💔',
+                'red',
+            )
+        elif self.human_choice_index == 0 and self.computer_choice_index == 2:
+            self.label_text_result['text'], self.label_text_result['background'], = (
+                '👾🥳 You win 🥳👾',
+                'green',
+            )
         elif self.human_choice_index > self.computer_choice_index:
-            (
-                self.label_text_result['text'],
-                self.label_text_result['background'],
-            ) = ('🥳🎉 You win 🥳🎉', 'green')
+            self.label_text_result['text'], self.label_text_result['background'], = (
+                '🥳🎉 You win 🥳🎉',
+                'green',
+            )
         elif self.human_choice_index == self.computer_choice_index:
-            (
-                self.label_text_result['text'],
-                self.label_text_result['background'],
-            ) = ('🥶 All the same 😝', 'gray')
+            self.label_text_result['text'], self.label_text_result['background'], = (
+                '🥶 All the same 😝',
+                'gray',
+            )
         else:
-            (
-                self.label_text_result['text'],
-                self.label_text_result['background'],
-            ) = ('💔 You lose 💔', 'red')
+            self.label_text_result['text'], self.label_text_result['background'], = (
+                '💔 You lose 💔',
+                'red',
+            )
 
-        print(
-            self.label_text_result['text'],
-            self.label_text_result['background'],
-        )
+        print(self.label_text_result['text'], self.label_text_result['background'])
 
         self.disable_buttons(human_choice)
         self.show_result()
@@ -142,9 +131,7 @@ class RockPaperScissor:
 
         self.root.geometry('450x550+450+100')
 
-        self.label_image_computer['image'] = all_new_imagem_object.get(
-            self.computer_choice
-        )
+        self.label_image_computer['image'] = all_new_imagem_object.get(self.computer_choice)
         self.label_image_computer.pack(fill=tkinter.BOTH)
         self.label_text_result.pack(fill=tkinter.BOTH, expand=True)
         self.restart_button.pack(fill=tkinter.BOTH)
@@ -169,13 +156,9 @@ class RockPaperScissor:
     def show_widget(self):
         self.first_label.pack(fill=tkinter.BOTH, expand=True)
         self.frame_buttons.pack(fill=tkinter.X, expand=False)
-
         self.rock_button.pack(side=tkinter.LEFT, fill=tkinter.X, expand=True)
         self.paper_button.pack(side=tkinter.LEFT, fill=tkinter.X, expand=True)
-        self.scissors_button.pack(
-            side=tkinter.LEFT, fill=tkinter.X, expand=True
-        )
-
+        self.scissors_button.pack(side=tkinter.LEFT, fill=tkinter.X, expand=True)
         self.second_label.pack(fill=tkinter.BOTH, expand=True)
 
 
